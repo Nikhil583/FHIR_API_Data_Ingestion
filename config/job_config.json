@@ -1,0 +1,14 @@
+{
+    "base_url": "https://hapi.fhir.org/baseR4",
+    "resources": [
+    "Patient",
+    "Encounter",
+    "Observation",
+    "Condition"
+    ],
+    "days": 3,
+    "page_size": 100,
+    "raw_base_path": "dbfs:/FileStore/fhir/raw",
+    "catalog": "hive_metastore",
+    "schema": "fhir_assignment"
+}
