@@ -1,0 +1,300 @@
+{
+    "datasets": [
+    {
+    "name": "dataset1",
+    "displayName": "gold_resource_current_counts",
+    "queryLines": [
+    "SELECT * FROM hive_metastore.fhir_assignment.gold_resource_current_counts"
+    ]
+    }
+    ],
+    "pages": [
+    {
+    "name": "page1",
+    "displayName": "Overview",
+    "layout": [
+    {
+    "widget": {
+    "name": "text_box1",
+    "multilineTextboxSpec": {
+    "lines": [
+    "## FHIR Resource Counts\n",
+    "Current record counts by FHIR resource type"
+    ]
+    }
+    },
+    "position": {
+    "x": 0,
+    "y": 0,
+    "width": 6,
+    "height": 2
+    }
+    },
+    {
+    "widget": {
+    "name": "table1",
+    "queries": [
+    {
+    "name": "main_query",
+    "query": {
+    "datasetName": "dataset1",
+    "fields": [
+    {
+    "name": "resource",
+    "expression": "`resource`"
+    },
+    {
+    "name": "current_count",
+    "expression": "`current_count`"
+    }
+    ],
+    "disaggregated": true
+    }
+    }
+    ],
+    "spec": {
+    "version": 1,
+    "invisibleColumns": [],
+    "allowHTMLByDefault": false,
+    "itemsPerPage": 25,
+    "paginationSize": "default",
+    "condensed": true,
+    "withRowNumber": false,
+    "widgetType": "table",
+    "encodings": {
+    "columns": [
+    {
+    "fieldName": "resource",
+    "booleanValues": [
+    "false",
+    "true"
+    ],
+    "imageUrlTemplate": "{{ @ }}",
+    "imageTitleTemplate": "{{ @ }}",
+    "imageWidth": "",
+    "imageHeight": "",
+    "linkUrlTemplate": "{{ @ }}",
+    "linkTextTemplate": "{{ @ }}",
+    "linkTitleTemplate": "{{ @ }}",
+    "linkOpenInNewTab": true,
+    "type": "string",
+    "displayAs": "string",
+    "visible": true,
+    "order": 100000,
+    "title": "resource",
+    "allowSearch": false,
+    "alignContent": "left",
+    "allowHTML": false,
+    "highlightLinks": false,
+    "useMonospaceFont": false,
+    "preserveWhitespace": false
+    },
+    {
+    "fieldName": "current_count",
+    "numberFormat": "0",
+    "booleanValues": [
+    "false",
+    "true"
+    ],
+    "imageUrlTemplate": "{{ @ }}",
+    "imageTitleTemplate": "{{ @ }}",
+    "imageWidth": "",
+    "imageHeight": "",
+    "linkUrlTemplate": "{{ @ }}",
+    "linkTextTemplate": "{{ @ }}",
+    "linkTitleTemplate": "{{ @ }}",
+    "linkOpenInNewTab": true,
+    "type": "integer",
+    "displayAs": "number",
+    "visible": true,
+    "order": 100001,
+    "title": "current_count",
+    "allowSearch": false,
+    "alignContent": "right",
+    "allowHTML": false,
+    "highlightLinks": false,
+    "useMonospaceFont": false,
+    "preserveWhitespace": false
+    }
+    ]
+    }
+    }
+    },
+    "position": {
+    "x": 0,
+    "y": 7,
+    "width": 12,
+    "height": 5
+    }
+    },
+    {
+    "widget": {
+    "name": "total_counter",
+    "queries": [
+    {
+    "name": "main_query",
+    "query": {
+    "datasetName": "dataset1",
+    "fields": [
+    {
+    "name": "sum(current_count)",
+    "expression": "SUM(`current_count`)"
+    }
+    ],
+    "disaggregated": false
+    }
+    }
+    ],
+    "spec": {
+    "version": 2,
+    "frame": {
+    "showTitle": true,
+    "title": "Total Records"
+    },
+    "widgetType": "counter",
+    "encodings": {
+    "value": {
+    "fieldName": "sum(current_count)",
+    "displayName": "Total Records"
+    }
+    }
+    }
+    },
+    "position": {
+    "x": 6,
+    "y": 0,
+    "width": 6,
+    "height": 2
+    }
+    },
+    {
+    "widget": {
+    "name": "bar_resource_counts",
+    "queries": [
+    {
+    "name": "main_query",
+    "query": {
+    "datasetName": "dataset1",
+    "fields": [
+    {
+    "name": "sum(current_count)",
+    "expression": "SUM(`current_count`)"
+    },
+    {
+    "name": "resource",
+    "expression": "`resource`"
+    }
+    ],
+    "disaggregated": false
+    }
+    }
+    ],
+    "spec": {
+    "version": 3,
+    "frame": {
+    "showTitle": true,
+    "title": "Records by Resource Type"
+    },
+    "widgetType": "bar",
+    "encodings": {
+    "x": {
+    "fieldName": "sum(current_count)",
+    "axis": {
+    "title": "Count"
+    },
+    "scale": {
+    "type": "quantitative"
+    }
+    },
+    "y": {
+    "fieldName": "resource",
+    "axis": {
+    "title": "Resource Type"
+    },
+    "scale": {
+    "type": "categorical",
+    "sort": {
+    "by": "x"
+    }
+    }
+    }
+    }
+    }
+    },
+    "position": {
+    "x": 0,
+    "y": 2,
+    "width": 6,
+    "height": 5
+    }
+    },
+    {
+    "widget": {
+    "name": "pie_distribution",
+    "queries": [
+    {
+    "name": "main_query",
+    "query": {
+    "datasetName": "dataset1",
+    "fields": [
+    {
+    "name": "sum(current_count)",
+    "expression": "SUM(`current_count`)"
+    },
+    {
+    "name": "resource",
+    "expression": "`resource`"
+    }
+    ],
+    "disaggregated": false
+    }
+    }
+    ],
+    "spec": {
+    "frame": {
+    "showTitle": true,
+    "title": "Resource Distribution"
+    },
+    "version": 3,
+    "widgetType": "pie",
+    "encodings": {
+    "angle": {
+    "fieldName": "sum(current_count)",
+    "scale": {
+    "type": "quantitative"
+    }
+    },
+    "color": {
+    "fieldName": "resource",
+    "scale": {
+    "type": "categorical",
+    "sort": {
+    "by": "angle"
+    }
+    }
+    },
+    "label": {
+    "show": true
+    }
+    }
+    }
+    },
+    "position": {
+    "x": 6,
+    "y": 2,
+    "width": 6,
+    "height": 5
+    }
+    }
+    ],
+    "pageType": "PAGE_TYPE_CANVAS",
+    "layoutVersion": "GRID_V1"
+    }
+    ],
+    "uiSettings": {
+    "theme": {
+    "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+    }
+   }
